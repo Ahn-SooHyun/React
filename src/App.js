@@ -1,6 +1,8 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { useContext, useState } from "react";
+
 import Calc1 from "./comp/calc/Study_01";
 
 import Inp1 from "./comp/inp/input_01";
@@ -19,39 +21,50 @@ import Assignment_20241204_MyPage from "./comp/assignment/day20241204/MyPage";
 import Red01 from "./comp/red/Red01";
 import Red02 from "./comp/red/Red02";
 
+import ContextAction from "./comp/context/ContextAction";
+
+import { ContextAPI } from "./context/ContextAPI";
+
 function App() {
+  const [parent, setParent] = useState();
+
   return (
     <div className="App">
-      <BrowserRouter>
-        <About />
-        <Routes>
-          <Route path={"/"} element={<Home />} />
-          <Route path={"/about"} element={<About />} />
-          <Route path={"/cal1"} element={<Calc1 />} />
+      <ContextAPI.Provider value={{ parent, setParent }}>
+        {" "}
+        <BrowserRouter>
+          <About />
+          <Routes>
+            <Route path={"/"} element={<Home />} />
+            <Route path={"/about"} element={<About />} />
+            <Route path={"/cal1"} element={<Calc1 />} />
 
-          <Route path={"/Inp1"} element={<Inp1 />} />
-          <Route path={"/Oup1"} element={<Oup1 />} />
-          <Route path={"/Ref1"} element={<Ref1 />} />
+            <Route path={"/Inp1"} element={<Inp1 />} />
+            <Route path={"/Oup1"} element={<Oup1 />} />
+            <Route path={"/Ref1"} element={<Ref1 />} />
 
-          <Route path={"/ProJoin"} element={<ProJoin />} />
-          <Route path={"/ProLogin"} element={<ProLogin />} />
-          <Route path={"/ProItemList"} element={<ProItemList />} />
+            <Route path={"/ProJoin"} element={<ProJoin />} />
+            <Route path={"/ProLogin"} element={<ProLogin />} />
+            <Route path={"/ProItemList"} element={<ProItemList />} />
 
-          <Route path={"/Ax1"} element={<Ax1 />} />
+            <Route path={"/Ax1"} element={<Ax1 />} />
 
-          <Route
-            path={"/Assignment_20241204_Login"}
-            element={<Assignment_20241204_Login />}
-          />
-          <Route
-            path={"/Assignment_20241204_MyPage"}
-            element={<Assignment_20241204_MyPage />}
-          />
+            <Route
+              path={"/Assignment_20241204_Login"}
+              element={<Assignment_20241204_Login />}
+            />
+            <Route
+              path={"/Assignment_20241204_MyPage"}
+              element={<Assignment_20241204_MyPage />}
+            />
 
-          <Route path={"/Red01"} element={<Red01 />} />
-          <Route path={"/Red02"} element={<Red02 />} />
-        </Routes>
-      </BrowserRouter>
+            <Route path={"/Red01"} element={<Red01 />} />
+            <Route path={"/Red02"} element={<Red02 />} />
+
+            <Route path={"/ContextAction"} element={<ContextAction />} />
+          </Routes>
+        </BrowserRouter>
+      </ContextAPI.Provider>
     </div>
   );
 }
@@ -97,14 +110,22 @@ function Home() {
       <br />
       <Link to="/Red02">Red02</Link>
       <br />
+
+      <h4> ContextAction</h4>
+      <Link to="/ContextAction">ContextAction</Link>
+      <br />
     </div>
   );
 }
 
 function About() {
+  const { parent, setParent } = useContext(ContextAPI);
+
   return (
     <div style={{ border: "2px blue solid" }}>
       <Link to="/">Home으로 이동</Link>
+      <br />
+      context 값 : {parent}
     </div>
   );
 }
