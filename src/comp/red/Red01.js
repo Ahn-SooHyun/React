@@ -1,7 +1,24 @@
 import { useReducer, useState } from "react";
 
 // 함수 공식 명칭 useReducer.
-function changeTest(status, action) {}
+//status : 첫 번재 인자값 (oldStatus), 호출 되었을 때 reducer에 담겨 있는 값.
+//action : reducer를 호출 (해당 행위 명칭은 action )이 되었을 때, action에 값이 들어 온다.
+//reducer 함수는 action의 값을 확인해서 status 값을 변경한다.
+function changeTest(status, action) {
+  console.log("status : ", status);
+  console.log(`action : ${action}`);
+
+  switch (action) {
+    case "up":
+      return status + 1;
+    case "down":
+      return status - 1;
+    case "reset":
+      return 0;
+  }
+
+  return status;
+}
 
 export default function Red01() {
   const [data, setData] = useState(0);
@@ -11,6 +28,7 @@ export default function Red01() {
     <div>
       <h1>Red01</h1>
       {data}
+      <br />
       <input
         type="button"
         value="증가"
@@ -24,6 +42,32 @@ export default function Red01() {
         value="감소"
         onClick={(e) => {
           setData(data - 1);
+        }}
+      />
+      <br />
+      <br />
+      <br />
+      {test}
+      <br />
+      <input
+        type="button"
+        value="증가"
+        onClick={(e) => {
+          setTest("up");
+        }}
+      />
+      <input
+        type="button"
+        value="감소"
+        onClick={(e) => {
+          setTest("down");
+        }}
+      />
+      <input
+        type="button"
+        value="감소"
+        onClick={(e) => {
+          setTest("reset");
         }}
       />
     </div>

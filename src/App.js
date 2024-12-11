@@ -17,6 +17,7 @@ import Assignment_20241204_Login from "./comp/assignment/day20241204/login";
 import Assignment_20241204_MyPage from "./comp/assignment/day20241204/MyPage";
 
 import Red01 from "./comp/red/Red01";
+import Red02 from "./comp/red/Red02";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
           />
 
           <Route path={"/Red01"} element={<Red01 />} />
+          <Route path={"/Red02"} element={<Red02 />} />
         </Routes>
       </BrowserRouter>
     </div>
@@ -92,6 +94,8 @@ function Home() {
 
       <h4> red</h4>
       <Link to="/Red01">Red01</Link>
+      <br />
+      <Link to="/Red02">Red02</Link>
       <br />
     </div>
   );
